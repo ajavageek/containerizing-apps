@@ -10,7 +10,7 @@
     </parent>
     <groupId>ch.frankel.blog</groupId>
     <artifactId>spring-in-docker</artifactId>
-    <version>5.0</version>
+    <version>5.5</version>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -24,6 +24,11 @@
             <artifactId>hazelcast</artifactId>
             <version>(4.1.0,4.1.99-SNAPSHOT)</version> <!-- Keep a SNAPSHOT for demo purpose -->
         </dependency>
+        <dependency>
+            <groupId>org.springframework.experimental</groupId>
+            <artifactId>spring-graalvm-native</artifactId>
+            <version>0.8.5</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -36,6 +41,9 @@
                     </layers>
                     <image>
                         <name>${project.artifactId}:${project.version}</name>
+                        <env>
+                            <BP_BOOT_NATIVE_IMAGE>true</BP_BOOT_NATIVE_IMAGE>
+                        </env>
                     </image>
                 </configuration>
             </plugin>
@@ -53,5 +61,15 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>spring-dependencies-milestones</id>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-plugins-milestones</id>
+            <url>https://repo.spring.io/milestone</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
