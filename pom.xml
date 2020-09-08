@@ -10,7 +10,7 @@
     </parent>
     <groupId>ch.frankel.blog</groupId>
     <artifactId>spring-in-docker</artifactId>
-    <version>2.0</version>
+    <version>2.1</version>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -36,6 +36,9 @@
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>2.5.2</version>
                 <configuration>
+                    <from>
+                        <image>adoptopenjdk/openjdk11:alpine-jre</image>
+                    </from>
                     <to>
                         <image>${project.artifactId}:${project.version}</image>
                     </to>
