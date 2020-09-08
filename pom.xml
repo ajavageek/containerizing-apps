@@ -10,7 +10,7 @@
     </parent>
     <groupId>ch.frankel.blog</groupId>
     <artifactId>spring-in-docker</artifactId>
-    <version>5.0</version>
+    <version>5.5</version>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -24,9 +24,26 @@
             <artifactId>hazelcast</artifactId>
             <version>(4.1.0,4.1.99-SNAPSHOT)</version> <!-- Keep a SNAPSHOT for demo purpose -->
         </dependency>
+        <dependency>
+            <groupId>org.springframework.experimental</groupId>
+            <artifactId>spring-native</artifactId>
+            <version>0.12.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.experimental</groupId>
+                <artifactId>spring-aot-maven-plugin</artifactId>
+                <version>0.12.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -35,7 +52,11 @@
                         <enabled>true</enabled>
                     </layers>
                     <image>
+                        <builder>paketobuildpacks/builder:tiny</builder>
                         <name>${project.artifactId}:${project.version}</name>
+                        <env>
+                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+                        </env>
                     </image>
                 </configuration>
             </plugin>
@@ -53,5 +74,15 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>spring-dependencies-releases</id>
+            <url>https://repo.spring.io/release</url>
+        </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-plugins-releases</id>
+            <url>https://repo.spring.io/release</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
