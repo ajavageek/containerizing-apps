@@ -10,7 +10,7 @@
     </parent>
     <groupId>ch.frankel.blog</groupId>
     <artifactId>spring-in-docker</artifactId>
-    <version>2.1</version>
+    <version>3.0</version>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -30,18 +30,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>3.0.0</version>
                 <configuration>
-                    <from>
-                        <image>adoptopenjdk/openjdk11:alpine-jre</image>
-                    </from>
-                    <to>
-                        <image>${project.artifactId}:${project.version}</image>
-                    </to>
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
                 </configuration>
             </plugin>
         </plugins>
