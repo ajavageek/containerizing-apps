@@ -1,8 +1,13 @@
-# docker build -t spring-in-docker:0.5 .
+# docker build -t spring-in-docker:1.0 .
 
-FROM eclipse-temurin:23-jre
+FROM eclipse-temurin:23-jdk-alpine
 
-COPY target/spring-in-docker-0.5.jar spring-in-docker.jar
+COPY .mvn .mvn
+COPY mvnw .
+COPY pom.xml .
+COPY src src
+RUN ./mvnw package -DskipTests
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "spring-in-docker.jar"]
+
+ENTRYPOINT ["java", "-jar", "target/spring-in-docker-1.0.jar"]
