@@ -35,7 +35,7 @@
             <plugin>
                 <groupId>org.springframework.experimental</groupId>
                 <artifactId>spring-aot-maven-plugin</artifactId>
-                <version>0.9.2</version>
+                <version>0.10.3</version>
                 <executions>
                     <execution>
                         <goals>
